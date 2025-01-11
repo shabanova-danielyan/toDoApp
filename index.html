@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <body>
-            <input placeholder="text">
-            <button>Submit</button>
-            <button>Clear List</button>
-        <script src="app.js"></script>
-        </body>
+        <meta charset="UTF-8" />
+        <meta name="viewport"
+        content="width=device+width, initial-scale=1.0" />
+
+        <style>
+            body {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                background: linear-gradient(to top left, #a37bab, #a699a9);
+                }
+        </style>
+
+        <title>To do App</title>
+    </head>
+    <body>
+        <div>
+            <p class="first">
+                <h1>Track your tasks!</h1>
+            </p>
+            <form class="second">
+                <input type="text" placeholder="My new task">
+                <button id="submit-task">Add to List</button>
+            </form>
+            <div class="third">
+                <h2>My current tasks</h2>
+                <p>You have no active tasks</p>
+                <button id="clear-list">Clear List</button>
+            </div>
+        </div>
+    <script src="app.js"></script>
+    </body>
     </head>
 </html>
+
+<!DOCTYPE html>

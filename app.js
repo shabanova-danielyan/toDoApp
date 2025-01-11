@@ -1,3 +1,4 @@
+'use strict';
 let items = [];
 function addItem(newItem) {
     items.push(newItem);
@@ -8,3 +9,8 @@ console.log(items);
 //function clearList() {
 // in progress    
 //}
+
+
+//function deleteItem()
+
+//function markAsDone
