@@ -4,28 +4,19 @@
         <meta charset="UTF-8" />
         <meta name="viewport"
         content="width=device+width, initial-scale=1.0" />
-
-        <style>
-            body {
-                height: 100vh;
-                display: flex;
-                align-items: center;
-                background: linear-gradient(to top left, #a37bab, #a699a9);
-                }
-        </style>
-
         <title>To do App</title>
+        <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
-        <div>
-            <p class="first">
+        <div id="box">
+            <p>
                 <h1>Track your tasks!</h1>
             </p>
-            <form class="second">
+            <form>
                 <input type="text" placeholder="My new task">
                 <button id="submit-task">Add to List</button>
             </form>
-            <div class="third">
+            <div>
                 <h2>My current tasks</h2>
                 <p>You have no active tasks</p>
                 <button id="clear-list">Clear List</button>

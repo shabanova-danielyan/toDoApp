@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    align-items: center;
+    background: cornSilk;
+    text-align: center;
+    }
+#box {
+    border: solid 2px gray;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    text-align: center;
+}
+.completed {
+    text-decoration: line-through;
+}
+h1 {
+    font-size: 60px;
+}
+h2 {
+    font-size: 30px;
+}
+p {
+    font-size: 23px;
+}
+
