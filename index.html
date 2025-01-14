@@ -12,16 +12,18 @@
             <p>
                 <h1>Track your tasks!</h1>
             </p>
-            <form>
-                <input type="text" placeholder="My new task" class="task">
+            <form onsubmit="return false;">
+                <input type="text" placeholder="My new task" class="textInput"  value="default value">
                 <button id="submit-btn">Add to List</button>
             </form>
             <div>
                 <h2>My current tasks</h2>
-                <p>You have no active tasks</p>
-                <button id="clear-list">Clear List</button>
+                <div id="tasks-container">
+                </div>
+                <button id="clear-list">Clear List</button>                
             </div>
         </div>
+    <p id="demo"></p>
     <script src="app.js"></script>
     </body>
     </head>
