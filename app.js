@@ -1,53 +1,35 @@
 'use strict';
 
-let items = [];
+let toDoTasks = [];
 
-function addItem(newItem) {
-    items.push(newItem);
+function addTask(newTask) {
+    toDoTasks.push(newTask);
 }
 
-function displayTasksList(items) {
-    items.forEach(function(task, index) {
-        const html = `<p id=task${index+1}>${task}</p>`;
-        const tasksContainer = document.getElementById("tasks-container");
-        tasksContainer.insertAdjacentHTML('beforeend', html)
-    });
-};
+function readUserInputAndDisplayIt() {
+    const userInput = document.querySelector('.textInput').value;
+    const html = `<p id=individual-task>${userInput}</p>
+                  <button class='remove-individual-task-btn''>Remove task</button>
+                  <button class='mark-as-done-btn'>Mark as done</button>`;
+    const tasksContainer = document.getElementById("tasks-container");
+    tasksContainer.insertAdjacentHTML('beforeend', html)
+    addTask(userInput);
+    console.log(toDoTasks);
+}
 
-function read_content_of_text_box_and_add_it_to_list() {
-    addItem(document.querySelector('.textInput').value);
-    console.log(items);
-    displayTasksList(items);
-};
+function removeTasksFromPage(array) {
+   const divWithTasksList = document.getElementById('tasks-container');
+   console.log(divWithTasksList, typeof divWithTasksList);
+   const parent = divWithTasksList.parentNode;
+   parent.removeChild(divWithTasksList);
+}
 
-document.querySelector('#submit-btn').addEventListener('click', read_content_of_text_box_and_add_it_to_list);
+function clearList(toDoTasks) {
+    toDoTasks = [];
+    console.log(toDoTasks);
+    removeTasksFromPage(toDoTasks);
+}
 
+document.querySelector('#submit-btn').addEventListener('click', readUserInputAndDisplayIt);
+document.querySelector('#clear-btn').addEventListener('click', clearList);
 
-
-
-//addItem("to clean the house");
-//console.log(items);
-
-//function clearList() {
-// in progress    
-//}
-
-
-//function deleteItem()
-//function markAsDone
-// function logg(a){
-//     console.log(a);
-// }    
-    // items.forEach((a,ii) => {
-    //     console.log(ii+"  "+a);
-    // });
-    //items.forEach(logg);
-    //console.log(items);
-
-//    let strrr = ""
-//    for (let index = 0; index < items.length; index++) {
-//        const element = items[index];
-//        strrr = strrr + element + "\n";  
-//    }
-//    document.getElementById("demo").innerHTML = strrr
-//};
