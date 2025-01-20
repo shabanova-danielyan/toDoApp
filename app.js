@@ -3,7 +3,7 @@
 function readUserInputAndDisplayItNew() {
     const userInput = document.querySelector('.textInput').value;
     const listOfTasks = document.querySelectorAll('.individual-task');
-    let nItems = listOfTasks.length; //TODO: make it in a normal way
+    let nItems = listOfTasks.length; 
     let newID =  nItems;
     
     const htmlTableRow = `<tr class=individual-task id=tableRow${newID}>
@@ -14,7 +14,7 @@ function readUserInputAndDisplayItNew() {
 
     const tasksContainer = document.getElementById("tasks-container");
     tasksContainer.insertAdjacentHTML('beforeend', htmlTableRow);
-    console.log(htmlTableRow);
+    //console.log(htmlTableRow);
     document.querySelector(`#btnRemoveItem${newID}`).addEventListener('click', ()=>removeOneTaskFromPage(newID));
     document.querySelector(`#btnMarkDone${newID}`).addEventListener('click', ()=>markAsDone(newID));
 }
@@ -32,10 +32,24 @@ function removeTasksFromPage() {
 }
 
 function markAsDone (id) {
+    const buttonMarkAsDone = document.getElementById(`btnMarkDone${id}`);
+    //console.log(buttonMarkAsDone);
     document.getElementById(`taskName${id}`).style.textDecoration = "line-through";
+    buttonMarkAsDone.textContent = "Undo";
+    buttonMarkAsDone.id = `btnUndo${id}`;
+    //console.log(document.getElementById(`tableRow${id}`));
+    document.querySelector(`#btnUndo${id}`).addEventListener('click', ()=>undo(id));
+}
+
+function undo(id) {
+    console.log(id);
+    const undoButton = document.getElementById(`btnUndo${id}`);
+    document.getElementById(`taskName${id}`).style.textDecoration = "none";
+    undoButton.textContent = "Mark as done";
+    undoButton.id = `btnMarkDone${id}`;
+    console.log(document.getElementById(`btnMarkDone${id}`));
+    document.querySelector(`#btnMarkDone${id}`).addEventListener('click', ()=>markAsDone(id));
 }
 
 document.querySelector('#submit-btn').addEventListener('click', readUserInputAndDisplayItNew);
 document.querySelector('#clear-btn').addEventListener('click', removeTasksFromPage);
-//IN PROGRESS document.querySelector(.mark-as-done-btn).addEventListener('click',markAsDone);
-
