@@ -7,7 +7,7 @@ function readUserInputAndDisplayItNew() {
     let newID =  nItems;
     
     const htmlTableRow = `<tr class=individual-task id=tableRow${newID}>
-                <th>${userInput}</th>
+                <th id=taskName${newID}>${userInput}</th>
                 <th><button class='remove-individual-task-btn' id=btnRemoveItem${newID}>Remove task</button></th>
                 <th><button class='mark-as-done-btn' id=btnMarkDone${newID}>Mark as done</button></th>
               </tr>`;
@@ -16,12 +16,12 @@ function readUserInputAndDisplayItNew() {
     tasksContainer.insertAdjacentHTML('beforeend', htmlTableRow);
     console.log(htmlTableRow);
     document.querySelector(`#btnRemoveItem${newID}`).addEventListener('click', ()=>removeOneTaskFromPage(newID));
-
+    document.querySelector(`#btnMarkDone${newID}`).addEventListener('click', ()=>markAsDone(newID));
 }
 
 function removeOneTaskFromPage (id) {
-    console.log(`Task with id ${id} has been removed.`);
     document.getElementById(`tableRow${id}`).remove();
+    console.log(`Task with id ${id} has been removed.`);
 }
 
 //New version when tasks are rows in a table
@@ -31,7 +31,9 @@ function removeTasksFromPage() {
    console.log("Table is cleared", tableWithTasksList);
 }
 
-//IN PROGRESS function markAsDone () {}
+function markAsDone (id) {
+    document.getElementById(`taskName${id}`).style.textDecoration = "line-through";
+}
 
 document.querySelector('#submit-btn').addEventListener('click', readUserInputAndDisplayItNew);
 document.querySelector('#clear-btn').addEventListener('click', removeTasksFromPage);
