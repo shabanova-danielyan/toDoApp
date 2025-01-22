@@ -1,55 +1,81 @@
 'use strict';
 
+let tasksObject = {};
+
+function findLargestIdInList() {
+    const listOfTasksIds = Object.keys(tasksObject).map(Number);
+    const numberOfTasksInToDoList = listOfTasksIds.length;
+    let largestIdInList = 0;
+    for (let i=0; i<numberOfTasksInToDoList; i++) {
+        if (largestIdInList<listOfTasksIds[i]) {
+            largestIdInList = listOfTasksIds[i];
+        };
+    };
+    return largestIdInList;
+}
+
 function readUserInputAndDisplayItNew() {
     const userInput = document.querySelector('.textInput').value;
-    const listOfTasks = document.querySelectorAll('.individual-task');
-    let nItems = listOfTasks.length; 
-    let newID =  nItems;
+    const listOfTasksIds = Object.keys(tasksObject);
+    const numberOfTasksInToDoList = listOfTasksIds.length;
     
-    const htmlTableRow = `<tr class=individual-task id=tableRow${newID}>
-                <th id=taskName${newID}>${userInput}</th>
-                <th><button class='remove-individual-task-btn' id=btnRemoveItem${newID}>Remove task</button></th>
-                <th><button class='mark-as-done-btn' id=btnMarkDone${newID}>Mark as done</button></th>
-              </tr>`;
-
+    let newID;
+    if (numberOfTasksInToDoList == 0) {
+        newID = 0;
+        } else {
+        newID = findLargestIdInList() + 1;
+        };
+    
+    console.log(newID);
     const tasksContainer = document.getElementById("tasks-container");
+
+    const htmlTableRow = `<tr class="individual-task" id="tableRow${newID}">
+    <th class="rowText" id="taskName${newID}">${userInput}</th>
+    <th><button class="button" id="btnRemoveItem${newID}">Remove task</button></th>
+    <th><button class="button" id="btnMarkDone${newID}">Mark as done</button></th>
+    </tr>`;
     tasksContainer.insertAdjacentHTML('beforeend', htmlTableRow);
-    //console.log(htmlTableRow);
+    console.log(htmlTableRow);
+
+    tasksObject[newID] = {
+        taskDescription: `${userInput}`,
+        status: 'Not done'
+    };
+    
     document.querySelector(`#btnRemoveItem${newID}`).addEventListener('click', ()=>removeOneTaskFromPage(newID));
-    document.querySelector(`#btnMarkDone${newID}`).addEventListener('click', ()=>markAsDone(newID));
+    document.querySelector(`#btnMarkDone${newID}`).addEventListener('click', ()=>onClick(newID));
 }
 
 function removeOneTaskFromPage (id) {
     document.getElementById(`tableRow${id}`).remove();
+    delete tasksObject[id];
     console.log(`Task with id ${id} has been removed.`);
 }
 
-//New version when tasks are rows in a table
-function removeTasksFromPage() {
-   const tableWithTasksList = document.getElementById('tasks-container');
-   tableWithTasksList.innerHTML = "";
-   console.log("Table is cleared", tableWithTasksList);
-}
-
-function markAsDone (id) {
+function onClick (id) {
     const buttonMarkAsDone = document.getElementById(`btnMarkDone${id}`);
-    //console.log(buttonMarkAsDone);
-    document.getElementById(`taskName${id}`).style.textDecoration = "line-through";
-    buttonMarkAsDone.textContent = "Undo";
-    buttonMarkAsDone.id = `btnUndo${id}`;
-    //console.log(document.getElementById(`tableRow${id}`));
-    document.querySelector(`#btnUndo${id}`).addEventListener('click', ()=>undo(id));
+    const taskHTML = document.getElementById(`taskName${id}`);
+
+    const singleTask = tasksObject[id];
+    if (singleTask.status == "Not done")
+    {
+        taskHTML.style.textDecoration = "line-through";
+        buttonMarkAsDone.textContent = "Undo";
+        singleTask.status = "Done";
+    }
+    else{
+        taskHTML.style.textDecoration = "";
+        buttonMarkAsDone.textContent = "Mark as done";
+        singleTask.status = "Not done";
+    }
 }
 
-function undo(id) {
-    console.log(id);
-    const undoButton = document.getElementById(`btnUndo${id}`);
-    document.getElementById(`taskName${id}`).style.textDecoration = "none";
-    undoButton.textContent = "Mark as done";
-    undoButton.id = `btnMarkDone${id}`;
-    console.log(document.getElementById(`btnMarkDone${id}`));
-    document.querySelector(`#btnMarkDone${id}`).addEventListener('click', ()=>markAsDone(id));
-}
+function removeTasksFromPage() {
+    const tableWithTasksList = document.getElementById('tasks-container');
+    tableWithTasksList.innerHTML = "";
+    tasksObject = {};
+    console.log("Table is cleared", tableWithTasksList);
+ }
 
 document.querySelector('#submit-btn').addEventListener('click', readUserInputAndDisplayItNew);
 document.querySelector('#clear-btn').addEventListener('click', removeTasksFromPage);
