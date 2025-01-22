@@ -1,28 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     align-items: center;
     background: cornSilk;
     text-align: center;
+    padding: 200px;
     }
 #box {
-    border: solid 2px gray;
+    border: solid 4px gray;
     border-radius: 10px;
     padding-top: 20px;
     padding-right: 50px;
     padding-bottom: 50px;
     padding-left: 50px;
-    text-align: center;
+    text-align: center; 
 }
-.completed {
-    text-decoration: line-through;
-}
+
 h1 {
     font-size: 60px;
+    margin-bottom: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-top: 25px;
+    font-family: 'Trebuchet MS';
 }
 h2 {
-    font-size: 30px;
+    font-size: 40px;
+    margin-bottom: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-top: 25px;
+    font-family: 'Trebuchet MS';
 }
 p {
     font-size: 23px;
+    font-family: 'Trebuchet MS';
 }
 
+.button {
+    font-size: 20px;
+    padding: 5px;
+    font-family: 'Trebuchet MS';
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.textInput {
+    font-size: 20px;
+    padding: 5px;
+    font-family: 'Trebuchet MS';
+}
+
+.rowText {
+    font-size: 20px;
+    padding: 5px;
+    font-family: 'Trebuchet MS';    
+}
