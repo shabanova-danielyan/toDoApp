@@ -3,14 +3,15 @@
 let tasksObject = {};
 
 function findLargestIdInList() {
-    const listOfTasksIds = Object.keys(tasksObject);
+    const listOfTasksIds = Object.keys(tasksObject).map(Number);
     const numberOfTasksInToDoList = listOfTasksIds.length;
     let largestIdInList = 0;
-    for (let i=0; i<numberOfTasksInToDoList+1; i++) {
+    for (let i=0; i<numberOfTasksInToDoList; i++) {
         if (largestIdInList<listOfTasksIds[i]) {
             largestIdInList = listOfTasksIds[i];
         };
     };
+    return largestIdInList;
 }
 
 function readUserInputAndDisplayItNew() {
@@ -20,11 +21,12 @@ function readUserInputAndDisplayItNew() {
     
     let newID;
     if (numberOfTasksInToDoList == 0) {
-        newID = 1;
+        newID = 0;
         } else {
         newID = findLargestIdInList() + 1;
         };
     
+    console.log(newID);
     const tasksContainer = document.getElementById("tasks-container");
 
     const htmlTableRow = `<tr class="individual-task" id="tableRow${newID}">
@@ -35,7 +37,7 @@ function readUserInputAndDisplayItNew() {
     tasksContainer.insertAdjacentHTML('beforeend', htmlTableRow);
     console.log(htmlTableRow);
 
-    tasksObject['id${newID}'] = {
+    tasksObject[newID] = {
         taskDescription: `${userInput}`,
         status: 'Not done'
     };
@@ -46,7 +48,7 @@ function readUserInputAndDisplayItNew() {
 
 function removeOneTaskFromPage (id) {
     document.getElementById(`tableRow${id}`).remove();
-    delete tasksObject['id${newID}'];
+    delete tasksObject[id];
     console.log(`Task with id ${id} has been removed.`);
 }
 
@@ -54,7 +56,7 @@ function onClick (id) {
     const buttonMarkAsDone = document.getElementById(`btnMarkDone${id}`);
     const taskHTML = document.getElementById(`taskName${id}`);
 
-    const singleTask = tasksObject['id${id}'];
+    const singleTask = tasksObject[id];
     if (singleTask.status == "Not done")
     {
         taskHTML.style.textDecoration = "line-through";
